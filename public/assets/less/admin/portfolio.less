@@ -1,0 +1,77 @@
+/**** PORTFOLIO ****/
+.table > tbody > tr {
+	&.fund-row > td {
+		font-weight: @boldWeight;
+		font-size: 18px;
+		padding-top: 24px;	
+	}	
+}
+
+.table > tbody > tr {
+	&.company-row > td, &.new-company-row > td {
+		&.table-col-1, &.table-col-2 {
+			font-size: 16px;
+		}
+		&.table-col-1 {
+			padding-left: 32px;		
+		}
+		a {
+			&.btn-stroke {
+				border-color: #CCC;
+			}
+		}
+	}
+	&.new-company-row > td {
+		padding-bottom: 24px !important; 
+		border-bottom: 1px solid #DDD;
+	}
+}
+
+.table > thead > tr {
+	&.icons-row > th,
+	&.labels-row > th {
+		padding-left: 25px;
+		padding-right: 25px;
+		padding-bottom: 0px;
+	}
+
+	&.unit-row > th {
+		font-size: 10px;
+		text-transform: uppercase;
+		color: #888;
+		vertical-align: top !important;
+		
+		&.table-col-1, &.table-col-2 {
+			font-weight: @boldWeight;
+			font-size: 14px;
+			vertical-align: bottom !important;
+		}
+	}
+}
+
+.table > thead > tr > th {
+	font-weight: @mediumWeight;
+	font-size: 15px;
+	&.table-col-kpi {
+		vertical-align: middle;
+	}
+}
+
+.table > thead > tr > th {
+	&.table-col-arrow > a {
+		color: #797979;
+		&.disabled {
+			color: #DDD;
+			cursor: default;
+		}
+	}
+}
+
+.reportingPeriodLinks {
+	margin: 0 10px;
+}
+
+.filter-label {
+	text-transform: uppercase;
+	padding-top: 8px !important;
+}

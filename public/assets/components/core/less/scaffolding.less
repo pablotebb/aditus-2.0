@@ -1,0 +1,119 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,300,700);
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700);
+
+html {
+	-webkit-font-smoothing: antialiased !important;
+	height:100%;
+}
+body {
+	color: #000;
+	background: @bodyBg;
+	font-family: 'Gotham SSm A', 'Gotham SSm B', 'Gotham'; 
+	font-weight: @normalWeight; 
+	font-style: normal;
+	font-size: 13px;
+}
+
+// Outlines
+// -------------------------
+
+*, a:focus { outline: none !important; }
+button:focus { outline: none !important; }
+button::-moz-focus-inner { border: 0; }
+
+ul {
+	padding: 0;
+	&.list-regular {
+		padding-left: 20px;
+		.list-regular {
+			padding-left: 40px;
+		}
+	}
+}
+
+#content {
+	h1,h2,h3 {
+		font-family: 'Gotham SSm A', 'Gotham SSm B', 'Gotham'; 
+		font-style: normal;
+		margin: 0;
+		&.content-heading {
+			font-size: 24px;
+			text-transform: uppercase;
+			padding: 15px 0;
+		}
+		span { font-size: 60%; color: #ccc; font-weight: normal; }
+	}
+	> h1, > h2, > h3 {
+		&, &.content-heading {
+			padding: 15px;
+		}
+	}
+	.col-table > .content-heading {
+		padding: 15px;
+	}
+	.innerAll {
+		> h1, > h2, > h3 {
+			&, &.content-heading {
+				padding: 0 0 15px;
+			}
+		}
+	}
+}
+
+strong {
+	font-weight: @boldWeight;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-weight: @boldWeight; 
+	text-transform: uppercase;
+	&.no-transform {
+		text-transform: none;
+	}
+	&.normal-weight {
+		font-weight: @normalWeight;
+	}
+	&.medium-weight {
+		font-weight: @mediumWeight;
+	}
+}
+h4, h5, h6 {
+	color: lighten(@bodyText, 30%);	
+	margin-top: 0;
+	&.separator {
+		margin-bottom: 0;
+	}
+}
+h6 {
+	color: @mediumTextColor;
+}
+
+a, a:hover {
+	color: #000;
+	text-decoration: none;
+}
+
+.borderB { border-bottom:1px solid @navbar-top-separator;}
+
+.lead {
+	font-size: 2.2em;
+	line-height: 1.5em;
+}
+
+hr {
+	margin-bottom: 30px;
+	&.thin {
+		margin-top: 4px;
+		/* margin-bottom: 12px; */
+	}
+	&.strong {
+		border-top: 1px solid #000;
+	}
+}
+
+.light-text {
+	color: @lightTextColor;
+}
+.medium-text {
+	color: @mediumTextColor;
+}

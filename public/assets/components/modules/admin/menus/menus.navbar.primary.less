@@ -1,0 +1,76 @@
+.navbar.main {
+	&.navbar-primary {
+		.appbrand { color: #fff; }
+		border-bottom-color: darken(@navbarBg,13%);
+		background-color: @navbarBg;
+		.caret {
+			border-top-color: #fff;
+			border-bottom-color: #fff;
+		}		
+		.dropdown-toggle {
+			color: lighten(@navbarBg,43%) !important;
+			&:hover { 
+				color:#ffffff; 
+				text-decoration: none; 
+				.caret {
+					border-top-color: #fff;
+					border-bottom-color: #fff;
+				}
+			}
+		}
+		a.main-nav { 
+			color: #fff; 
+			font-size: 1em;
+			text-transform: uppercase;
+			border-left: 1px solid @navbarMenuBorder;
+			font-weight: 500;
+		}
+		a.main-nav > i { 
+			color: lighten(@navbarBg,43%) !important; 
+			margin-right: 10px;
+			font-size: 0.7em;
+		}		
+		a.menu-icon > i { color: #fff}
+		.navbar-brand {
+			/* border-right: 1px solid darken(@navbarBg,13%); */
+			@media (max-width: 767px) {
+			padding-right:10px;
+			}
+			.btn.text-regular { color: lighten(@navbarBg,43%) !important; }
+		}
+		.toggle-button {
+			> i { color: lighten(@navbarBg,13%); }
+			&:hover i { color:#fff; }
+		}
+		.navbar-form {
+			input { background-color: darken(@navbarBg,13%); color:#fff; }
+			::-webkit-input-placeholder { color: lighten(@navbarBg,10%); }
+			:-moz-placeholder { color: lighten(@navbarBg,10%); }
+			::-moz-placeholder { color: lighten(@navbarBg,10%); }
+			:-ms-input-placeholder { color: lighten(@navbarBg,10%); }
+			.btn {
+				border: none;
+				border-left: 1px solid darken(@navbarBg,13%);
+				color: #fff;
+				border-right:1px solid  @navbarBg; 
+				background:  darken(@navbarBg,13%); ;
+				&:hover { color: lighten(@navbarBg,50%);}
+			}
+		}
+		.nav .open>a { background-color: darken(@navbarBg,13%); }
+		.nav>li>a:focus { background: none; }
+		.nav > li {
+			border-left-color: darken(@navbarBg,13%);
+			> a {
+				&:hover { background-color: darken(@navbarBg,13%); }
+				.badge {
+					&.badge-primary {
+						background-color: #fff;
+						color:@navbarBg;
+					}
+				}
+			}
+			&.lang { background-color: darken(@navbarBg,13%); }
+		}
+	}
+}

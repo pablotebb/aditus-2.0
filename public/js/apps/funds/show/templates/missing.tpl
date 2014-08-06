@@ -1,0 +1,1 @@
+<div class="alert alert-error">This fund doesn't exist !</div>
