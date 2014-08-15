@@ -8,7 +8,10 @@
 return array(
     'modules' => array(
         'Application',
-        'Aditus'
+        'Aditus',
+        'DoctrineModule',
+        'DoctrineORMModule',
+        'ZendDeveloperTools',        
     ),
     'module_listener_options' => array(
         'module_paths' => array(

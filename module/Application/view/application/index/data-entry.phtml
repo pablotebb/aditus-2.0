@@ -1,0 +1,80 @@
+
+<div class="bg-white innerAll border-bottom">
+	<div id="filter-region">
+
+		<div>
+			<ul class="menubar pull-left">    
+				<li><a href="#">PORTFOLIO</a></li>
+				<li>/</li>
+				<li><a href="#">Fund Name</a></li>
+			</ul>
+		</div>
+
+		<div class="clearfix"></div>
+
+		<h1 style="padding-left: 10px;">Company Name</h1>
+
+		<div class="clearfix"></div>
+
+	</div>
+</div>
+
+<div class="innerAll spacing-x2">
+    <div id="kpi-region">
+
+    	<h4>Environmental</h4>
+    	<hr class="strong thin" />
+
+    	<?php for( $x=0; $x<5; $x++ ): ?>
+    	<div class="row">
+    		<div class="col-sm-8">
+    			
+    			<div class="row">
+    				<div class="col-sm-1 col-xs-2 text-center">
+    					
+						<span class="btn btn-circle btn-environmental">1</span>
+
+    				</div>
+    				<div class="col-sm-10 col-xs-10">
+
+    					<div class="kpi-short-name">Short Name</div>
+    					<p class="kpi-question">Question text goes here d;fadf adlkfjadlkfja ldkfjalkdfj aldkfjalkdfjal dkfjalkdjfalkdsjfalkdjf lakdjfl akdjflakdj flakdjf lakdjflakdsjf lakjdflak djflkajdsf lakdjflakdjf adlskfjadskfajd</p>
+
+    					<div class="clearfix"></div>
+
+    					<div class="kpi-comment-container">
+    						<a href="#" class="btn btn-default">Add Comment</a>
+    					</div>
+    				</div>
+    			</div>
+
+    		</div>
+    		<div class="col-sm-4">
+    			<div class="row">
+	    			<div class="col-sm-4 text-center">
+	    				<div class="kpi-value-title">PREVIOUS</div>
+	    				<div>
+	    					<input type="text" class="form-control" placeholder="col4" />
+	    				</div>
+	    			</div>
+	    			<div class="col-sm-4 text-center">
+	    				<div class="kpi-value-title">CURRENT</div>
+	    				<div>
+	    					<input type="text" class="form-control" placeholder="col4" />
+	    				</div>
+	    			</div>
+	    			<div class="col-sm-4 text-center">
+	    				<div class="kpi-value-title">TARGET</div>
+	    				<div>
+	    					<input type="text" class="form-control" placeholder="col4" />
+	    				</div>
+	    			</div>
+	    		</div>
+    		</div>
+    	</div>
+
+		<hr />
+		<?php endfor; ?>
+
+    </div>
+</div>

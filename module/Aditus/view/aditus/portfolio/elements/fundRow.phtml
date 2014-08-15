@@ -1,0 +1,30 @@
+<!-- FUND -->
+<tr class="fund-row">
+    <td class="table-col-1">
+        <?= $group->getName(); ?>
+    </td>
+    <td class="table-col-2 text-center">&nbsp;</td>
+    <td class="table-col-3">&nbsp;</td>
+    <td class="table-col-arrow hidden-sm hidden-xs">&nbsp;</td>
+    <?php foreach( $indicators as $indicator ): ?>
+    <td class="table-col-kpi hidden-sm hidden-xs text-center">
+        <?= isset($averages[$group->getId()][$indicator->getId()]) 
+            ? number_format($averages[$group->getId()][$indicator->getId()], $indicator->getDecimals()) 
+                .($indicator->getAnswerType() == 'YN' ? '%' : '')
+            : '&nbsp;'
+        ; ?>
+    </td>
+    <?php endforeach; ?>
+    <td class="table-col-arrow hidden-sm hidden-xs">&nbsp;</td>
+    <td class="table-col-last text-right">
+        <div class="btn-group">
+            <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                <i class="fa fa-chevron-down"></i>
+            </a>
+            <ul class="dropdown-menu pull-right">
+                <li><a data-toggle="modal" href="<?= $this->url('fund', array('id'=>$group->getId())); ?>" data-target="#modal">Edit Fund</a></li>
+                <li><a data-toggle="modal" href="<?= $this->url('fund-delete', array('id'=>$group->getId())); ?>" data-target="#modal">Delete Fund</a></li>
+            </ul>
+        </div>
+    </td>
+</tr>

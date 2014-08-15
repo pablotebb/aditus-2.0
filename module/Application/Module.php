@@ -14,11 +14,55 @@ use Zend\Mvc\MvcEvent;
 
 class Module
 {
+    // unauthenticated whitelist
+    private $_whitelist = array(
+        'login' ,
+        'register' ,
+    );
+
+    /*
     public function onBootstrap(MvcEvent $e)
     {
         $eventManager        = $e->getApplication()->getEventManager();
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
+    }
+    */
+
+    public function onBootstrap(MvcEvent $e)
+    {
+
+        $eventManager = $e->getApplication()->getEventManager();
+
+        // check if the user is still logged in before routing
+        $eventManager->attach(MvcEvent::EVENT_DISPATCH, array($this, 'authPreDispatch'), 100);
+        $moduleRouteListener = new ModuleRouteListener();
+        $moduleRouteListener->attach($eventManager);
+    }
+
+    /**
+     * [authPreDispatch]
+     *
+    */
+    public function authPreDispatch($event)
+    {
+        $authenticationService = $event->getApplication()->getServiceManager()->get('Zend\Authentication\AuthenticationService');
+        $loggedUser = $authenticationService->getIdentity();
+        $routeMatch = $event->getRouteMatch();
+
+        /*
+        *  This is the routing to other functions that are whitelisted.
+        *
+        */
+        if ($authenticationService->hasIdentity() == false &&
+            in_array($routeMatch->getMatchedRouteName(), $this->_whitelist) == false) {
+            $url = $event->getRouter()->assemble(array('action' => 'login'), array('name' => 'login'));
+            $response = $event->getResponse();
+            $response->getHeaders()->addHeaderLine('Location', $url);
+            $response->setStatusCode(302);
+            $response->sendHeaders();
+            exit;
+        }
     }
 
     public function getConfig()

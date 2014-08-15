@@ -1,0 +1,127 @@
+<style>
+	/*
+	table { width: 100%; }	
+
+	thead, tbody, tr, td, th { display: block; }
+
+	tr:after {
+	    content: ' ';
+	    display: block;
+	    visibility: hidden;
+	    clear: both;
+	}
+
+	thead th {
+	    height: 30px;
+	}
+
+	tbody {
+	    height: 400px;
+	    overflow-y: auto;
+	}
+
+	thead {
+	}
+
+
+	tbody td, thead th {
+	    float: left;
+	}
+
+	.table-col-1 {
+		width: 15% !important;
+	}
+	.table-col-2 {
+		width: 5% !important;
+	}
+	.table-col-3 {
+		width: 5% !important;
+	}
+	.table-col-arrow {
+		width: 1% !important;
+	}
+	.table-col-kpi {
+		width: 8% !important;
+	}
+	.table-col-last {
+		width: 1% !important;
+	}
+	*/
+</style>
+
+<div class="bg-white innerAll border-bottom">
+	<div id="filter-region">
+		<ul class="menubar pull-left">
+		    <li>FILTER</li>
+		    <li class="dropdown">
+		        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
+		        <ul class="dropdown-menu">
+		            <li><a href="#">Dropdown Link #1</a></li>
+		            <li><a href="#">Dropdown Link #2</a></li>
+		            <li><a href="#">Dropdown Link #3</a></li>
+		        </ul>
+		    </li>
+		</ul>
+
+		<div class="pull-right">
+		    <a href="" class="btn btn-inverse btn-stroke">Add Fund</a>
+		    <a href="" class="btn btn-default"><i class="fa fa-download"></i></a>
+		    <a href="" class="btn btn-default"><i class="fa fa-file"></i></a>
+		    <a href="" class="btn btn-default"><i class="fa fa-print"></i></a>
+		</div>
+
+		<div class="clearfix"></div>
+	</div>
+</div>
+
+<div class="clearfix"></div>
+
+<div class="innerAll spacing-x2">
+    <div id="funds-region">
+
+		<table class="table table-condensed" data-mode="swipe" id="portfolio_table">
+			<thead>
+				<tr class="no-border header">
+					<th class="table-col-1" data-priority="persist">&nbsp;</th>
+					<th class="table-col-2" data-priority="persist">&nbsp;</th>
+					<th class="table-col-3" data-priority="persist">&nbsp;</th>
+					<th class="table-col-arrow" data-priority="persist"><a href="#" class="tablesaw-nav-btn btn btn-default left prevBtn"><i class="fa fa-chevron-left"></i></a></th>
+					<?php for( $x=0; $x<20; $x++ ): ?>
+					<th class="table-col-kpi text-center">&nbsp;</th>
+					<?php endfor; ?>
+					<th class="table-col-arrow" data-priority="persist"><a href="#" class="tablesaw-nav-btn btn btn-default right nextBtn"><i class="fa fa-chevron-right"></i></a></th>
+					<th class="table-col-last" data-priority="persist">&nbsp;</th>
+				</tr>
+				<tr class="no-border-top">
+					<th class="table-col-1" data-priority="persist" width="25%">Fund / Companies</th>
+					<th class="table-col-2" data-priority="persist" width="10%">Data<br />Completion</th>
+					<th class="table-col-3" data-priority="persist" width="5%">&nbsp;</th>
+					<th class="table-col-arrow" data-priority="persist" width="1%">&nbsp;</th>
+					<?php for( $x=0; $x<20; $x++ ): ?>
+					<th class="table-col-kpi text-center" width="12%"><?= $x; ?></th>
+					<?php endfor; ?>
+					<th class="table-col-arrow" data-priority="persist" width="1%">&nbsp;</th>
+					<th class="table-col-last" data-priority="persist" width="1%">&nbsp;</th>
+				</tr>
+			</thead>
+			<tbody>
+				<?php for( $i=0; $i<32; $i++ ): ?>
+				<tr>
+					<td class="table-col-1">Fund Name</td>
+					<td class="table-col-2">10924</td>
+					<td class="table-col-3">20%</td>
+					<td class="table-col-arrow">&nbsp;</td>
+					<?php for( $x=0; $x<20; $x++ ): ?>
+					<td class="table-col-kpi text-center"><?= time() * $x; ?></td>
+					<?php endfor; ?>					
+					<td class="table-col-arrow">&nbsp;</td>
+					<td class="table-col-last"><a href="btn btn-small btn-default"><i class="fa fa-chevron-down"></i></a></td>
+				</tr>
+				<?php endfor; ?>
+			</tbody>
+		</table>
+
+    </div>
+</div>
+
+

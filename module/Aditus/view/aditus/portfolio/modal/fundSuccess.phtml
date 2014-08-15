@@ -1,0 +1,53 @@
+	<div class="innerLR">
+	    <div class="row innerTB">
+	        <div class="col-sm-2 text-center">
+	            <img class="" src="/img/icons/add-fund.png" width="60" />
+	        </div>
+	        <div class="col-sm-10">
+	            <h3 class="no-transform medium-weight modal-title">Add Fund</h3>
+	        </div>
+	    </div>
+
+	    <div class="clearfix"></div>
+
+	    <div class="row innerTB">
+	        <div class="col-sm-12 text-center">
+	            <i class="fa fa-check-circle" style="color: #74BD79; font-size: 80px;"></i>
+	            <div class="light-text" style="padding-top: 20px">Fund Added!</div>
+	        </div>
+	    </div>
+
+	    <div class="clearfix"></div>
+
+	    <div class="row innerAll">
+	        <div class="col-sm-12">
+	            <div class="row">
+	            	<div class="col-sm-3 col-sm-offset-2 text-center">
+	            		<div class="well" style="background-color:#FFF; height:120px; vertical-align:middle;">
+	            			<a href="<?= $this->url('company', array('id'=>$fund->getId())); ?>" class="launch-modal">
+		            			<div><img class="" src="/img/icons/add-company.png" width="40" /></div>
+		            			<div style="font-size: 10px; padding-top: 10px;">Add Company to Fund</div>
+		            		</a>
+	            		</div>
+	            	</div>
+	            	<div class="col-sm-2 text-center" style="height:120px; vertical-align:middle; padding-top:50px;">
+	            		<div><em>or</em></div>
+	            	</div>
+	            	<div class="col-sm-3 text-center">
+	            		<div class="well" style="background-color:#FFF; height:120px; vertical-align:middle;">
+	            			<a href="<?= $this->url('fund'); ?>" class="launch-modal">
+		            			<div><img class="" src="/img/icons/add-fund.png" width="40" /></div>
+		            			<div style="font-size: 10px; padding-top: 10px;">Add Another Fund</div>
+		            		</a>
+	            		</div>
+	            	</div>
+	            </div>
+	        </div>
+	    </div>
+
+	    <div class="row innerTB">
+	        <div class="col-sm-12 text-center">
+	            <a href="<?= $this->url('portfolio'); ?>" class="btn btn-inverse btn-stroke">Close</a>
+	        </div>
+	    </div>                    
+	</div>

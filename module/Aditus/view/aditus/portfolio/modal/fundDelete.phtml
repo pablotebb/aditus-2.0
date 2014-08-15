@@ -1,0 +1,36 @@
+<?php $fundForm->prepare(); ?>
+<?= $this->form()->openTag($fundForm->setAttribute('action', $this->url('fund-delete', array('id'=>$fund->getId())))); ?>
+    <div class="innerLR">
+        <div class="row innerTB">
+            <div class="col-sm-2 text-center">
+                <img class="" src="/img/icons/add-fund.png" width="60" />
+            </div>
+            <div class="col-sm-10">
+                <h3 class="no-transform medium-weight modal-title">Delete Fund</h3>
+            </div>
+        </div>
+
+        <div class="row innerTB">
+            <div class="col-sm-12">
+                <h6>Fund</h6>
+                <div><?= $fund->getName(); ?></div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                Are you sure you want to delete this fund and the companies from your portfolio?
+            </div>
+        </div>
+
+        <div class="row innerTB">
+            <hr />
+            <div class="col-sm-3">
+                <button type="button" class="btn btn-inverse btn-stroke form-control" data-dismiss="modal">Close</button>
+            </div>
+            <div class="col-sm-3 col-sm-offset-6 text-right">
+                <button type="button" class="btn btn-danger form-control modal-submit">Delete</button>
+            </div>
+        </div>                    
+    </div>
+</form>

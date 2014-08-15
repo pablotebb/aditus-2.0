@@ -1,0 +1,54 @@
+<?php $companyForm->prepare(); ?>
+<?= $this->form()->openTag($companyForm->setAttribute('action', $this->url('company', array('id'=>$fund->getId(), 'companyId'=>$company->getId())))); ?>
+    <div class="innerLR">
+        <div class="row innerTB">
+            <div class="col-sm-2 text-center">
+                <img class="" src="/img/icons/add-company.png" width="60" />
+            </div>
+            <div class="col-sm-10">
+                <h3 class="no-transform medium-weight modal-title"><?= is_null($company->getId()) ? 'Add' : 'Edit'; ?> Company</h3>
+            </div>
+        </div>
+
+        <div class="row innerTB">
+            <div class="col-sm-12">
+                <h6>Fund</h6>
+                <div><?= $fund->getName(); ?></div>
+            </div>
+        </div>
+
+        <div class="row innerTB">
+            <div class="col-sm-12">
+                <?= $companyForm->get('company')->get('name')->getLabel(); ?>
+                <div class="">
+                    <?= $this->formElement($companyForm->get('company')->get('name')->setAttribute('class','form-control')); ?>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-5">
+                <?= $companyForm->get('company')->get('industry')->get('id')->getLabel(); ?>
+                <div class="">
+                    <?= $this->formElement($companyForm->get('company')->get('industry')->get('id')->setAttribute('class','form-control')); ?>
+                </div>
+            </div>
+            <div class="col-sm-5 col-sm-offset-2">
+                <?= $companyForm->get('company')->get('country')->get('id')->getLabel(); ?>
+                <div class="">
+                    <?= $this->formElement($companyForm->get('company')->get('country')->get('id')->setAttribute('class','form-control')); ?>
+                </div>
+            </div>                        
+        </div>
+
+        <div class="row innerTB">
+            <hr />
+            <div class="col-sm-3">
+                <button type="button" class="btn btn-inverse btn-stroke form-control" data-dismiss="modal">Close</button>
+            </div>
+            <div class="col-sm-3 col-sm-offset-6 text-right">
+                <button type="button" class="btn btn-primary btn-stroke form-control modal-submit"><?= is_null($company->getId()) ? 'Add' : 'Save'; ?> Company</button>
+            </div>
+        </div>                    
+    </div>
+</form>

@@ -1,0 +1,93 @@
+<?php 
+	// $assessmentPeriods = array_reverse($assessmentPeriods);
+	$count = 0;
+	$current = 0;
+	$reportingPeriodOptions = array();
+	$groupByOptions = array();
+?>
+
+<?php 
+	// loop through all assessment periods
+	foreach( $assessmentPeriods as $assessmentPeriod ){
+		// set the previous
+		if( $assessmentPeriod == $currentPeriod ){
+			$current = $count;
+		}
+		$reportingPeriodOptions[] = sprintf('<option value="%s" %s>%s</option>', 
+			$assessmentPeriod['reportingYear'].'/'.$assessmentPeriod['reportingPeriod'],
+			($assessmentPeriod == $currentPeriod ? 'selected="selected"' : ''),
+			$assessmentPeriod['reportingYear'].($assessmentPeriod['reportingPeriod'] != 'YEAR' ? ' '.$assessmentPeriod['reportingPeriod'] : '')
+		);
+		$count++;
+	}
+
+	// group by Options
+	foreach( array('fund','sector','country') as $key => $value ){
+		$groupByOptions[] = sprintf('<option value="%s">%s</option>', $key, ucwords($value));
+	}
+?>
+
+<div class="row">
+	<div class="col-sm-11">
+		<div class="row">
+				<div class="col-xs-1 text-center filter-label">
+					<?= $filterForm->get('industry')->get('id')->getLabel(); ?>
+				</div>
+				<div class="col-xs-2">
+					<?= $this->formElement($filterForm->get('industry')->get('id')->setAttribute('class','form-control')); ?>
+				</div>
+				<div class="col-xs-1 text-center filter-label">
+					<?= $filterForm->get('country')->get('id')->getLabel(); ?>
+				</div>
+				<div class="col-xs-2">
+					<?= $this->formElement($filterForm->get('country')->get('id')->setAttribute('class','form-control')); ?>
+				</div>
+				<div class="col-xs-1 text-center filter-label">
+					Period
+				</div>
+				<div class="col-xs-1">
+					<select name="reportingPeriod" class="form-control">
+					<?= implode(' ', $reportingPeriodOptions); ?>
+					</select>			
+				</div>
+				<div class="col-xs-1 text-center filter-label">
+					Group By
+				</div>
+				<div class="col-xs-1">
+					<select name="groupBy" class="form-control">
+					<?= implode(' ', $groupByOptions); ?>
+					</select>			
+				</div>
+				<div class="col-xs-2">
+					<a href="javascript:;" id="filterBtn" class="btn btn-inverse btn-stroke">Apply Filter</a>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div class="col-sm-1 text-right">
+		<div class="row">
+			<a data-toggle="modal" href="<?= $this->url('fund'); ?>" data-target="#modal" data-backdrop="static" class="btn btn-inverse btn-stroke">Add Fund</a>
+		</div>
+	</div>
+</div>
+
+<?php $this->inlineScript()->captureStart(); ?>
+	require([jqueryPath], function(){
+		$('#filterBtn').click(function(){
+			// base url
+			var url = "<?= $baseUrl; ?>";
+
+			// reporting period
+			url += '/' + ($('select[name=reportingPeriod]').val() != '' ? $('select[name=reportingPeriod]').val() : '0');
+
+			// industryId
+			url += '/' + ($('select[name=industryId]').val() != '' ? $('select[name=industryId]').val() : '0');
+			
+			// countryId
+			url += '/' + ($('select[name=countryId]').val() != '' ? $('select[name=countryId]').val() : '0');
+
+			console.log(url);
+			window.location = url;
+		});
+	});
+<?php $this->inlineScript()->captureEnd(); ?>

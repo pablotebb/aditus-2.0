@@ -1,0 +1,51 @@
+<?php $registerForm->prepare(); ?>
+
+<div class="login spacing-x2" style="margin-top: 80px;">
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-3 text-center">
+            <div><img class="" src="/img/icons/user.png" /></div>
+            <div class="heading">Welcome to Aditus<sup>BETA</sup></div>
+
+            <div class="message">
+                Please register below to access Aditus and participate in our beta program.
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6 col-sm-offset-3">
+                    <?= $this->form()->openTag($registerForm); ?>
+                        <div class="form-group">
+                            <?= $this->formElement($registerForm->get('account')->get('name')->setAttribute('class','form-control text-center')); ?>
+                        </div>
+                        <div class="form-group">
+                            <?= $this->formElement($registerForm->get('firstName')->setAttribute('class','form-control text-center')); ?>
+                        </div>
+                        <div class="form-group">
+                            <?= $this->formElement($registerForm->get('lastName')->setAttribute('class','form-control text-center')); ?>
+                        </div>
+                        <div class="form-group">
+                            <?= $this->formElement($registerForm->get('email')->setAttribute('class','form-control text-center')); ?>
+                        </div>
+                        <div class="form-group">
+                            <?= $this->formElement($registerForm->get('secret')->setAttribute('class','form-control text-center')); ?>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-inverse btn-stroke" style="padding-left:30px; padding-right:30px;">Register</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="innerTB clearfix">&nbsp;</div>
+
+            <div class="row">
+                <div class="col-sm-6 col-sm-offset-3">
+                    <div class="form-group">
+                        <div class="message" style="padding-bottom:10px;">Already have an account?</div>
+                        <a href="<?= $this->url('login'); ?>" class="btn btn-inverse btn-stroke medium-weight" style="padding-left:30px; padding-right:30px;">Sign In</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

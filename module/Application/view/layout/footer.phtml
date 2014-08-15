@@ -1,0 +1,16 @@
+<div id="footer" class="hidden-print innerAll hidden-sm">
+	<div class="innerLR">
+	<div class="row">
+		<div class="col-md-6">
+			<!--  Copyright Line -->
+			<div class="copy">&copy; <?= date('Y'); ?> ESG Analytics AG. All Rights Reserved.</div>
+			<!--  End Copyright Line -->
+		</div>
+	    <?php if( $this->identity() ): ?>
+		<div class="col-md-6 text-right">
+			<a data-toggle="modal" href="<?= $this->url('feedback', array('action'=>'edit')); ?>" data-target="#modal" class="btn btn-inverse btn-stroke">Beta Feedback</a>
+		</div>
+		<?php endif; ?>
+	</div>	
+	</div>
+</div>

@@ -1,0 +1,35 @@
+<?php $fundForm->prepare(); ?>
+<?= $this->form()->openTag($fundForm->setAttribute('action', $this->url('fund', array('id'=>$fund->getId())))); ?>
+	<div class="innerLR">
+	    <div class="row innerTB">
+	        <div class="col-sm-2 text-center">
+	            <img class="" src="/img/icons/add-fund.png" width="60" />
+	        </div>
+	        <div class="col-sm-10">
+	            <h3 class="no-transform medium-weight modal-title"><?= is_null($fund->getId()) ? 'Add' : 'Edit'; ?> Fund</h3>
+	        </div>
+	    </div>
+
+	    <div class="clearfix"></div>
+
+	    <div class="row innerTB">
+	        <div class="col-sm-12">
+	            <?= $fundForm->get('fund')->get('name')->getLabel(); ?>
+	            <div class="innerTB">
+	                <?= $this->formElement($fundForm->get('fund')->get('name')->setAttribute('class','form-control')); ?>
+	            </div>
+	        </div>
+	    </div>
+
+	    <div class="clearfix"></div>
+
+	    <div class="row innerTB">
+	        <div class="col-sm-3">
+	            <button type="button" class="btn btn-inverse btn-stroke form-control" data-dismiss="modal">Close</button>
+	        </div>
+	        <div class="col-sm-3 col-sm-offset-6 text-right">
+	            <button type="button" class="btn btn-primary btn-stroke form-control modal-submit"><?= is_null($fund->getId()) ? 'Add' : 'Save'; ?> Fund</button>
+	        </div>
+	    </div>                    
+	</div>
+</form>

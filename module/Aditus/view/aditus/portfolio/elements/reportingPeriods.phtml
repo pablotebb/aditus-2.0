@@ -1,0 +1,29 @@
+<?php 
+	$assessmentPeriods = array_reverse($assessmentPeriods);
+	$count = 0;
+	$current = 0;
+	$links = array();
+?>
+
+<?php 
+	// loop through all assessment periods
+	foreach( $assessmentPeriods as $assessmentPeriod ){
+		// set the previous
+		if( $assessmentPeriod == $currentPeriod ){
+			$current = $count;
+		}
+		$links[] = '<a href="'.$this->url('portfolio', $assessmentPeriod).'" class="reportingPeriodLinks '.($assessmentPeriod != $currentPeriod ? '' : 'btn btn-inverse btn-stroke').'">'.$assessmentPeriod['reportingYear'].($assessmentPeriod['reportingPeriod'] != 'YEAR' ? ' '.$assessmentPeriod['reportingPeriod'] : '').'</a>';
+		$count++;
+	}
+
+	// add previous link
+	if( $this->Arr()->get($assessmentPeriods, ($current-1), false) ){
+		array_unshift($links, '<a href="'.$this->url('portfolio', $assessmentPeriods[$current-1]).'" class="reportingPeriodLinks "><i class="fa fa-chevron-left"></i></a>');
+	}
+	// add next link
+	if( $this->Arr()->get($assessmentPeriods, ($current+1), false) ){
+		$links[] = '<a href="'.$this->url('portfolio', $assessmentPeriods[$current+1]).'" class="reportingPeriodLinks "><i class="fa fa-chevron-right"></i></a>';
+	}
+?>
+
+<?= implode('&nbsp;', $links); ?>

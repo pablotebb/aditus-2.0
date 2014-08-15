@@ -1,0 +1,215 @@
+<div class="bg-white innerAll border-bottom">
+    <div class="row">
+        <div class="col-sm-3">
+            <h1 class="content-heading padding-none pull-left">Portfolio</h1>
+        </div>
+        <div class="col-sm-9 text-right">
+            REPORTING PERIOD: <strong><?= $this->Arr()->get($currentPeriod, 'reportingYear') . ($this->Arr()->get($currentPeriod, 'reportingPeriod') != 'YEAR' ? ' '.$this->Arr()->get($currentPeriod, 'reportingPeriod') : ''); ?></strong>
+            &nbsp;
+            <a data-toggle="modal" data-target="#filterModal" data-backdrop="static" class="btn btn-inverse btn-stroke">Filter</a>
+            &nbsp;
+            <a data-toggle="modal" href="<?= $this->url('fund'); ?>" data-target="#modal" data-backdrop="static" class="btn btn-inverse btn-stroke">Add Fund</a>
+            &nbsp;
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+</div>
+
+<div class="clearfix"></div>
+
+<div class="innerAll spacing-x2">
+    <div id="funds-region">
+
+        <?php if( count($portfolio) > 0 ): ?>
+
+        <table class="table table-condensed" data-mode="swipe" id="portfolio-table">
+            <thead>
+                <tr class="no-border header vertical-align-middle icons-row">
+                    <th class="table-col-1" data-priority="persist">&nbsp;</th>
+                    <th class="table-col-2" data-priority="persist">&nbsp;</th>
+                    <th class="table-col-arrow hidden-sm hidden-xs" data-priority="persist">
+                        <a href="#" class="tablesaw-nav-btn left prevBtn"><i class="fa fa-chevron-left"></i></a>
+                    </th>
+                    <?php foreach( $indicators as $indicator ): ?>
+                    <th class="table-col-kpi hidden-sm hidden-xs text-center">
+                        <a href="<?= $this->url('indicators', array('action'=>'view', 'id'=>$indicator->getId())); ?>" data-container="body" data-toggle="popover" data-placement="bottom" data-content="<?= $indicator->getRationale(); ?>">
+                            <img width="80" src="/img/icons/large/<?= strtolower($indicator->getCode()); ?>.png" />                                    
+                        </a>
+                    </th>
+                    <?php endforeach; ?>
+                    <?php for( $x=count($indicators); $x<$this->Num()->roundUpToNearest(count($indicators), 5); $x++ ): ?>
+                    <th class="table-col-kpi hidden-sm hidden-xs text-center">&nbsp;</th>
+                    <?php endfor; ?>
+                    <th class="table-col-arrow hidden-sm hidden-xs" data-priority="persist">
+                        <a href="#" class="tablesaw-nav-btn right nextBtn"><i class="fa fa-chevron-right"></i></a>
+                    </th>
+                    <th class="table-col-last" data-priority="persist">&nbsp;</th>
+                </tr>
+                <tr class="no-border labels-row">
+                    <th class="table-col-1" data-priority="persist" width="20%">&nbsp;</th>
+                    <th class="table-col-2 text-center" data-priority="persist" width="10%">&nbsp;</th>
+                    <th class="table-col-arrow hidden-sm hidden-xs" data-priority="persist" width="1%">&nbsp;</th>
+                    <?php foreach( $indicators as $indicator ): ?>
+                    <th class="table-col-kpi hidden-sm hidden-xs text-center" width="12%">
+                        <a href="<?= $this->url('indicators', array('action'=>'view', 'id'=>$indicator->getId())); ?>" data-container="body" data-toggle="popover" data-placement="bottom" data-content="<?= $indicator->getRationale(); ?>">
+                            <?= $indicator->getDisplayName(); ?>
+                        </a>
+                    </th>
+                    <?php endforeach; ?>
+                    <?php for( $x=count($indicators); $x<$this->Num()->roundUpToNearest(count($indicators), 5); $x++ ): ?>
+                    <th class="table-col-kpi hidden-sm hidden-xs text-center">&nbsp;</th>
+                    <?php endfor; ?>
+                    <th class="table-col-arrow hidden-sm hidden-xs" data-priority="persist">&nbsp;</th>
+                    <th class="table-col-last" data-priority="persist">&nbsp;</th>
+                </tr>
+                <tr class="no-border-top unit-row">
+                    <th class="table-col-1" data-priority="persist"><?= strtoupper($portfolio['groupBy']); ?> / Companies</th>
+                    <th class="table-col-2" data-priority="persist">
+                        <?php if( $portfolio['groupBy'] == 'sector' ): ?>
+                            Country
+                        <?php else: ?>
+                            Sector
+                        <?php endif; ?>
+                    </th>
+                    <th class="table-col-arrow hidden-sm hidden-xs" data-priority="persist">&nbsp;</th>
+                    <?php foreach( $indicators as $indicator ): ?>
+                    <th class="table-col-kpi hidden-sm hidden-xs text-center">
+                        <?= $indicator->getUnit(); ?>
+                    </th>
+                    <?php endforeach; ?>
+                    <?php for( $x=count($indicators); $x<$this->Num()->roundUpToNearest(count($indicators), 5); $x++ ): ?>
+                    <th class="table-col-kpi hidden-sm hidden-xs text-center">&nbsp;</th>
+                    <?php endfor; ?>
+                    <th class="table-col-arrow hidden-sm hidden-xs" data-priority="persist">&nbsp;</th>
+                    <th class="table-col-last" data-priority="persist">&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                <?php foreach( $portfolio['groups'] as $group ): ?>
+
+                    <!-- <?= strtoupper($portfolio['groupBy']); ?> -->
+                    <tr class="fund-row">
+                        <td class="table-col-1">
+                            <?php if( strtoupper($portfolio['groupBy']) == 'FUND' ): ?>
+                                <?php 
+                                    if( count($group->getFundReports()) > 0 ){
+                                        $fundReport = $group->getFundReports(); 
+                                        $fundReportLink = $this->url('fund-report', array('id'=>$fundReport[0]->getId()));
+                                    } else {
+                                        $fundReportLink = $this->url('create-report', array('fundId'=>$group->getId(), 'reportingYear'=>$currentPeriod['reportingYear'], 'reportingPeriod'=>$currentPeriod['reportingPeriod']));
+                                    }
+                                ?>
+                                <a href="<?= $fundReportLink; ?>">
+                                    <?= $group->getName(); ?>
+                                </a>
+                            <?php else: ?>
+                                <?= $group->getName(); ?>
+                            <?php endif; ?>
+                        </td>
+                        <td class="table-col-2 text-center">&nbsp;</td>
+                        <td class="table-col-arrow hidden-sm hidden-xs">&nbsp;</td>
+                        <?php foreach( $indicators as $indicator ): ?>
+                        <td class="table-col-kpi hidden-sm hidden-xs text-center">
+                            <?php 
+                                if( isset($portfolio['results'][$group->getId()][$indicator->getId()]['result']) ){
+                                    if( $indicator->getAnswerType() == 'YN' ){
+                                        echo ($portfolio['groupResult'] == 'average' ? number_format($portfolio['results'][$group->getId()][$indicator->getId()]['yesCountPercentage'] * 100).'% Yes' : number_format($portfolio['results'][$group->getId()][$indicator->getId()]['yesCount']).' Yes');
+                                    } else {
+                                        echo number_format($portfolio['results'][$group->getId()][$indicator->getId()]['result'], $indicator->getDecimals());
+                                    }
+                                } else {
+                                    echo '&nbsp;';
+                                }
+                            ?>
+                        </td>
+                        <?php endforeach; ?>
+                        <?php for( $x=count($indicators); $x<$this->Num()->roundUpToNearest(count($indicators), 5); $x++ ): ?>
+                        <td class="table-col-kpi hidden-sm hidden-xs text-center">&nbsp;</td>
+                        <?php endfor; ?>
+                        <td class="table-col-arrow hidden-sm hidden-xs">&nbsp;</td>
+                        <td class="table-col-last text-right">
+                            <?php if( $portfolio['groupBy'] == 'fund' ): ?>
+                                <div class="btn-group">
+                                    <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                        <i class="fa fa-chevron-down"></i>
+                                    </a>
+                                    <ul class="dropdown-menu pull-right">
+                                        <li><a data-toggle="modal" href="<?= $this->url('fund', array('id'=>$group->getId())); ?>" data-target="#modal">Edit Fund</a></li>
+                                        <li><a data-toggle="modal" href="<?= $this->url('fund-delete', array('id'=>$group->getId())); ?>" data-target="#modal">Delete Fund</a></li>
+                                    </ul>
+                                </div>
+                            <?php else: ?>
+                                &nbsp;
+                            <?php endif; ?>
+                        </td>
+                    </tr>
+
+
+                    <?php foreach( $group->getCompanies() as $company ): ?>
+                        <?= $this->partial('Aditus/portfolio/elements/companyRow', array('indicators'=>$indicators, 'company'=>$company, 'groupBy'=>$portfolio['groupBy'])); ?>
+                    <?php endforeach; ?>
+
+                    <!-- NEW COMPANY -->
+                    <tr class="new-company-row">
+                        <td class="table-col-1">
+                            <?php if( $portfolio['groupBy'] == 'fund' ): ?>
+                                <a data-toggle="modal" href="<?= $this->url('company', array('id'=>$group->getId())); ?>" data-target="#modal" class="btn btn-inverse btn-stroke">Add Company</a>
+                            <?php else: ?>
+                                &nbsp;
+                            <?php endif; ?>
+                        </td>
+                        <td class="table-col-2">&nbsp;</td>
+                        <td class="table-col-arrow hidden-sm hidden-xs">&nbsp;</td>
+                        <?php foreach( $indicators as $indicator ): ?>
+                        <td class="table-col-kpi hidden-sm hidden-xs text-center">&nbsp;</td>
+                        <?php endforeach; ?>
+                        <?php for( $x=count($indicators); $x<$this->Num()->roundUpToNearest(count($indicators), 5); $x++ ): ?>
+                        <td class="table-col-kpi hidden-sm hidden-xs text-center">&nbsp;</td>
+                        <?php endfor; ?>
+                        <td class="table-col-arrow hidden-sm hidden-xs">&nbsp;</td>
+                        <td class="table-col-last">&nbsp;</td>
+                    </tr>
+                    
+                <?php endforeach; ?>
+
+            </tbody>
+        </table>
+
+        <?php endif; ?>
+
+    </div>
+</div>
+
+<?= $this->partial('Aditus/elements/modal', array('id'=>'filterModal', 'body'=>$filterView)); ?>
+
+
+<?php $this->inlineScript()->captureStart(); ?>
+require([jqueryPath], function(){
+    $('.no-assessment').click(function(){
+
+        bootbox.dialog({
+            message: "No assessment found. Would you like to create one?",
+            title: "Assessment Not Found",
+            buttons: {
+                close: {
+                    label: "Cancel",
+                    className: "btn-inverse btn-stroke",
+                    callback: function() {
+                        console.log('cancel');
+                    }
+                },
+                success: {
+                    label: "Create",
+                    className: "btn-primary btn-stroke",
+                    callback: function() {
+                        console.log('create!');
+                    }
+                }
+            }
+        });
+
+    });    
+});
+<?php $this->inlineScript()->captureEnd(); ?>

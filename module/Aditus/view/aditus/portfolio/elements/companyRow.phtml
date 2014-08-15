@@ -1,0 +1,42 @@
+<?php $assessment = count($company->getAssessments()->toArray()) > 0 ? current($company->getAssessments()->toArray()) : null; ?>
+
+<!-- COMPANY -->
+<tr class="company-row">
+    <td class="table-col-1">
+        <?php if( !is_null($assessment) ): ?>
+            <a href="<?= $this->url('assessment', array('action'=>'edit', 'id'=>$assessment->getId())); ?>"><?= $company->getName(); ?></a>
+        <?php else: ?>
+            <a data-toggle="modal" href="<?= $this->url('assessment', array('action'=>'create', 'id'=>$company->getId())); ?>" data-backdrop="static" data-target="#modal"><?= $company->getName(); ?></a>
+        <?php endif; ?>
+    </td>
+    <td class="table-col-2">
+        <?php if( $groupBy == 'sector' ): ?>
+            <?= $company->getCountry()->getName(); ?>
+        <?php else: ?>
+            <?= $company->getIndustry()->getName(); ?>
+        <?php endif; ?>
+    </td>
+    <td class="table-col-arrow hidden-sm hidden-xs">&nbsp;</td>
+    <?php foreach( $indicators as $indicator ): ?>
+        <?php $detail = !is_null($assessment) && array_key_exists($indicator->getId(), $assessment->details->toArray()) ? $assessment->details[$indicator->getId()] : null; ?>
+        <td class="table-col-kpi hidden-sm hidden-xs text-center">
+            <?= !is_null($detail) && !is_null($detail->getCapturedValue()) ? $detail->getFormattedValue() : '&nbsp;'; ?>
+        </td>
+    <?php endforeach; ?>
+    <?php for( $x=count($indicators); $x<$this->Num()->roundUpToNearest(count($indicators), 5); $x++ ): ?>
+        <td class="table-col-kpi hidden-sm hidden-xs text-center">&nbsp;</td>
+    <?php endfor; ?>
+    <td class="table-col-arrow hidden-sm hidden-xs">&nbsp;</td>
+    <td class="table-col-last text-right" style="white-space:nowrap;">
+        <div class="btn-group">
+            <a href="#" class="btn btn-inverse btn-stroke dropdown-toggle" data-toggle="dropdown">
+                <i class="fa fa-chevron-down"></i>
+            </a>
+            <ul class="dropdown-menu pull-right">
+                <li><a data-toggle="modal" href="<?= $this->url('assessment', array('action'=>'create', 'id'=>$company->getId())); ?>" data-backdrop="static" data-target="#modal">New Report</a></li>
+                <li><a data-toggle="modal" href="<?= $this->url('company', array('id'=>$company->getFund()->getId(), 'companyId'=>$company->getId())); ?>" data-target="#modal">Edit Company</a></li>
+                <li><a data-toggle="modal" href="<?= $this->url('company-delete', array('id'=>$company->getId())); ?>" data-target="#modal">Delete Company</a></li>
+            </ul>
+        </div>
+    </td>
+</tr>

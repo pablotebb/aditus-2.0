@@ -1,0 +1,35 @@
+<?php $feedbackForm->prepare(); ?>
+<?= $this->form()->openTag($feedbackForm->setAttribute('action', $this->url('feedback', array('action'=>'edit')))); ?>
+	<div class="innerLR">
+	    <div class="row innerTB">
+	        <div class="col-sm-2 text-center">
+	            <img class="" src="/img/icons/feedback.png" width="60" />
+	        </div>
+	        <div class="col-sm-10">
+	            <h3 class="no-transform medium-weight modal-title"><?= is_null($feedback->getId()) ? 'Add' : 'Edit'; ?> Feedback</h3>
+	        </div>
+	    </div>
+
+	    <div class="clearfix"></div>
+
+	    <div class="row innerTB">
+	        <div class="col-sm-12">
+	            <?= $feedbackForm->get('feedback')->get('comments')->getLabel(); ?>
+	            <div class="innerTB">
+	                <?= $this->formElement($feedbackForm->get('feedback')->get('comments')->setAttribute('class','form-control')); ?>
+	            </div>
+	        </div>
+	    </div>
+
+	    <div class="clearfix"></div>
+
+	    <div class="row innerTB">
+	        <div class="col-sm-3">
+	            <button type="button" class="btn btn-inverse btn-stroke form-control" data-dismiss="modal">Close</button>
+	        </div>
+	        <div class="col-sm-3 col-sm-offset-6 text-right">
+	            <button type="button" class="btn btn-primary btn-stroke form-control modal-submit"><?= is_null($feedback->getId()) ? 'Add' : 'Save'; ?> Feedback</button>
+	        </div>
+	    </div>                    
+	</div>
+</form>

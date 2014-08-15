@@ -1,0 +1,61 @@
+<?php if( $this->identity() ): ?>
+
+    <header>
+        <div class="wrapper navbar navbar-fixed-top navbar-<?= ($this->identity() && $this->identity()->getAccount()->isAdmin()) ? 'inverse' : 'primary'; ?> main" role="navigation" <?= !$this->identity() ? 'style="border-bottom: 0px;' : ''; ?>>
+            <div class="innerLR">
+
+
+            <div class="row">
+                <div class="col-xs-4">
+                    <a href="" class="toggle-button toggle-sidebar btn-navbar"><i class="fa fa-bars" style="color: #fff;"></i></a>
+                </div>
+                <div class="col-xs-4 text-center">
+                    <div class="navbar-brand" style="float:none; width:auto;">
+                        <a href="<?= ($this->identity() && $this->identity()->getAccount()->isAdmin()) ? $this->url('admin/dashboard') : $this->url('portfolio'); ?>" class="appbrand">Aditus</a>
+                    </div>
+                </div>
+                <div class="col-xs-4 text-right">
+                    <div class="collapse navbar-collapse" id="main-nav">      
+                        <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                <a class="menu-icon">
+                                    <span style="color: #FFF; font-size: 20px"><?= $this->identity()->getFullName(); ?></span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </header>
+
+    <div class="clearfix"></div>
+
+    <div id="menu" class="hidden-print hidden-xs">
+        <div class="sidebar sidebar-inverse">
+            <div class="sidebarMenuWrapper">
+                <ul class="list-unstyled">
+                    <li><a href="" class="toggle-button toggle-sidebar btn-navbar"><i class="icon-delete-symbol" style="font-size:14px;"></i></a></li>
+                    
+                    <?php if( $this->identity()->getAccount()->isAdmin() ): ?>
+                        <li><a href="<?= $this->url('admin/dashboard'); ?>"><i class="icon-projector-screen-line"></i> Dashboard</a></li>
+                        <li><a href="<?= $this->url('admin/feedback'); ?>"><i class="icon-comment-fill-1"></i> Feedback</a></li>
+                        <li><a href="<?= $this->url('admin/indicators'); ?>"><i class="icon-dial-pad"></i> Indicators</a></li>
+                    <?php else: ?>
+                        <li><a href="<?= $this->url('portfolio'); ?>"><i class="fa fa-bars"></i> Portfolio</a></li>
+                        <li><a href="<?= $this->url('indicators'); ?>"><i class="icon-dial-pad"></i> Indicators</a></li>
+                        <li><a data-toggle="modal" href="<?= $this->url('profile'); ?>" data-target="#modal" data-backdrop="static" class="toggle-sidebar"><i class="icon-user-1"></i> Profile</a></li>
+                        <li><a href="<?= $this->url('support', array('action'=>'about')); ?>"><i class="fa fa-question-circle"></i> About Aditus</a></li>
+                        <!--
+                        <li><a href="<?= $this->url('portfolio'); ?>"><i class="icon-credit-card-back"></i> Billing</a></li>
+                        <li><a href="<?= $this->url('portfolio'); ?>"><i class="fa fa-question-circle"></i> Help &amp; Support</a></li>
+                        -->
+                    <?php endif; ?>
+                    <li><a href="<?= $this->url('logout'); ?>"><i class="fa fa-sign-out"></i> Log out</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+<?php endif; ?>

@@ -1,0 +1,83 @@
+<div class="innerAll spacing-x2">&nbsp;</div>
+<div class="clearfix"></div>
+
+<div class="innerAll spacing-x2">
+    <div class="text-center">
+        <div class="row">
+            <div class="col-sm-6 col-sm-offset-3">
+                <div style="padding: 20px;"><img class="" src="/img/icons/add-fund.png" /></div>
+
+                <div style="padding: 20px;">
+                    <h1 class="no-transform normal-weight">Welcome to Aditus</h1>
+                </div>
+                
+                <div style="padding: 20px 0px;">
+                    <h4 class="no-transform normal-weight light-text" style="line-height: 1.4em;">
+                        <p>Aditus offers guidance on environmental, social, and governance (ESG) metrics, also known as key performance indicators (KPIs), selected for their ability to be leveraged for cost savings, risk management, and/or the uncovering of opportunities for companies across different sectors. Additionally, three custom metrics can be added to meet firm's specific needs or strategy.</p>
+                        <p>The menu icon in the top left of the screen provides account and navigation options including to return to the main portfolio page. Click on 'Aditus' at the top of the screen to return to portfolio at any time.</p>
+                    </h4>
+                </div>
+
+                <div style="padding: 20px;">
+                    <a href="<?= $this->url('indicators'); ?>" class="btn btn-success btn-stroke">Explore KPIs</a>
+                    &nbsp;
+                    <a data-toggle="modal" href="<?= $this->url('fund'); ?>" data-target="#modal" data-backdrop="static" class="btn btn-success btn-stroke">Get Started</a>
+                </div>
+
+                <div style="padding: 40px;">
+                    <h5><a href="#learn_more" id="learn_link" class="light-text">LEARN MORE</a><h5>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div class="row" id="learn_more" style="display:none;">
+            <div class="col-sm-8 col-sm-offset-2">
+                <div class="col-sm-4">
+                    <p><img class="" src="/img/icons/add-company.png" /></p>
+                    <div class="light-text padding-top-15 innerLR">
+                        <h6 class="light-text">Create portfolio</h6>
+                        <p class="padding-top-15">To begin, enter the name of the fund(s) and the underlying companies. Before moving to data entry, the reporting period for the assessment, and the company's sector and country will need to be entered. Assessments can be started right away or at another time by clicking on the name of the company.</p>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <p><img class="" src="/img/icons/data-entry.png" /></p>
+                    <div class="light-text padding-top-15 innerLR">
+                        <h6 class="light-text">Capture key performance indicators</h6>
+                        <p class="padding-top-15">To complete an assessment, submit data for recommended ESG KPIs and for any custom metrics that have been added. Including qualitative information and performance targets can provide additional context. Please note that all data does not need to be inputted before viewing results. Additionally, the rationale for each KPI can be accessed by clicking the accompanying KPI graphics.</p>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <p><img class="" src="/img/icons/results.png" /></p>
+                    <div class="light-text padding-top-15 innerLR">
+                        <h6 class="light-text">View, analyze, and export results</h6>
+                        <p class="padding-top-15">To explore ESG performance, click 'View Results' on company's data entry page which combines any quantitative and qualitative information entered along with graphical displays. The aggregated data on portfolio page is further illustrated by a fund level report available by clicking the fund name. Data on specific KPIs can also be explored by clicking the KPI graphic on the portfolio page. Filters are available to view and group results by region, sector, and fund. All results can be exported to PDF or Microsoft Excel.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+
+        </div>
+
+        <div class="clearfix"></div>
+
+    </div>
+</div>
+
+<div class="innerAll spacing-x2">&nbsp;</div>
+<div class="clearfix"></div>
+
+<?php $this->inlineScript()->captureStart(); ?>
+require([jqueryPath], function(){
+    $('#learn_link').click(function(){
+        console.log('testing');
+        $('#learn_more').slideDown(1000, function(){
+            // $("html, body").animate({ scrollTop: $(document).height() }, "slow");
+            return false;
+        });
+    });    
+});
+<?php $this->inlineScript()->captureEnd(); ?>

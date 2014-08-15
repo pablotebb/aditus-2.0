@@ -1,0 +1,119 @@
+<?php 
+    // $assessmentPeriods = array_reverse($assessmentPeriods);
+    $count = 0;
+    $current = 0;
+    $reportingPeriodOptions = array();
+    $groupByOptions = array();
+    $groupResultOptions = array();
+?>
+
+<?php 
+    // loop through all assessment periods
+    foreach( $assessmentPeriods as $assessmentPeriod ){
+        // set the previous
+        if( $assessmentPeriod == $currentPeriod ){
+            $current = $count;
+        }
+        $reportingPeriodOptions[] = sprintf('<option value="%s" %s>%s</option>', 
+            $assessmentPeriod['reportingYear'].'/'.$assessmentPeriod['reportingPeriod'],
+            ($assessmentPeriod == $currentPeriod ? 'selected="selected"' : ''),
+            $assessmentPeriod['reportingYear'].($assessmentPeriod['reportingPeriod'] != 'YEAR' ? ' '.$assessmentPeriod['reportingPeriod'] : '')
+        );
+        $count++;
+    }
+?>
+
+
+<div class="innerLR">
+    <div class="row innerTB">
+        <div class="col-sm-2 text-center">
+            <img class="" src="/img/icons/add-company.png" width="60" />
+        </div>
+        <div class="col-sm-10">
+            <h3 class="no-transform medium-weight modal-title">Filter Results</h3>
+        </div>
+    </div>
+
+    <div class="row innerTB">
+        <div class="col-sm-5 col-sm-offset-3">
+            Reporting Period
+            <div class="">
+                <select name="reportingPeriod" class="form-control">
+                <?= implode(' ', $reportingPeriodOptions); ?>
+                </select>           
+            </div>
+        </div>
+    </div>
+
+    <div class="row innerTB">
+        <div class="col-sm-5 col-sm-offset-3">
+            <?= $filterForm->get('industry')->get('id')->getLabel(); ?>
+            <div class="">
+                <?= $this->formElement($filterForm->get('industry')->get('id')->setAttribute('class','form-control')); ?>
+            </div>
+        </div>
+    </div>
+    <div class="row innerTB">
+        <div class="col-sm-5 col-sm-offset-3">
+            <?= $filterForm->get('country')->get('id')->getLabel(); ?>
+            <div class="">
+                <?= $this->formElement($filterForm->get('country')->get('id')->setAttribute('class','form-control')); ?>
+            </div>
+        </div>                        
+    </div>
+
+    <hr class="thin" style="margin:20px 0px;" />
+
+    <div class="row">
+        <div class="col-sm-3 col-sm-offset-3">
+            <?= $filterForm->get('groupBy')->getLabel(); ?>
+            <div class="">
+                <?= $this->formElement($filterForm->get('groupBy')->setAttribute('class','form-control')); ?>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <?= $filterForm->get('groupResult')->getLabel(); ?>
+            <div class="">
+                <?= $this->formElement($filterForm->get('groupResult')->setAttribute('class','form-control')); ?>
+            </div>
+        </div>                        
+    </div>
+
+
+    <div class="row innerTB">
+        <hr />
+        <div class="col-sm-3">
+            <button type="button" class="btn btn-inverse btn-stroke form-control" data-dismiss="modal">Close</button>
+        </div>
+        <div class="col-sm-3 col-sm-offset-6 text-right">
+            <a href="javascript:;" id="filterBtn" class="btn btn-success btn-stroke">Apply Filter</a>
+        </div>
+    </div>                    
+</div>
+
+<?php $this->inlineScript()->captureStart(); ?>
+    require([jqueryPath], function(){
+        $('#filterBtn').click(function(){
+            // base url
+            var url = "<?= $baseUrl; ?>";
+
+            // reporting period
+            url += '/' + ($('select[name=reportingPeriod]').val() != '' ? $('select[name=reportingPeriod]').val() : '0');
+
+            // industryId
+            url += '/' + ($('select[name=industryId]').val() != '' ? $('select[name=industryId]').val() : '0');
+            
+            // countryId
+            url += '/' + ($('select[name=countryId]').val() != '' ? $('select[name=countryId]').val() : '0');
+
+            // groupBy
+            url += '/' + $('select[name=groupBy]').val();
+
+            // groupResult
+            url += '/' + $('select[name=groupResult]').val();
+
+            console.log(url);
+            window.location = url;
+        });
+    });
+<?php $this->inlineScript()->captureEnd(); ?>
