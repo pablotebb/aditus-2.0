@@ -56,7 +56,22 @@ return array(
                     ),
                 ),
             ),
-/*            'profile' => array(
+            'static' => array(
+                'type'    => 'Segment',
+                'options' => array(
+                    'route'    => '/static[/:action]',
+                    'constraints'   => array(
+                        'action'    => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id'        => '[0-9]{0,24}',
+                    ),
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Aditus\Controller',
+                        'controller'    => 'Static',
+                    ),
+                ),
+            ),
+/*            
+            'profile' => array(
                 'type'    => 'Segment',
                 'options' => array(
                     'route'    => '/profile',
@@ -272,6 +287,7 @@ return array(
             'Aditus\Controller\Feedback' => 'Aditus\Controller\FeedbackController',
             'Aditus\Controller\Login' => 'Aditus\Controller\LoginController',
             'Aditus\Controller\Portfolio' => 'Aditus\Controller\PortfolioController',
+            'Aditus\Controller\Static' => 'Aditus\Controller\StaticController',
         ),
     ),
     'controller_plugins' => array(

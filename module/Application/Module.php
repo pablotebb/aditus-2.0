@@ -46,6 +46,7 @@ class Module
     */
     public function authPreDispatch($event)
     {
+        return;
         $authenticationService = $event->getApplication()->getServiceManager()->get('Zend\Authentication\AuthenticationService');
         $loggedUser = $authenticationService->getIdentity();
         $routeMatch = $event->getRouteMatch();
